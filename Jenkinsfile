@@ -8,13 +8,11 @@ pipeline {
         stage('Init') {
             steps {
                 sh 'ls'
-                sh 'export IF_IN_AUTOMATION=true'
                 sh 'terraform init -no-color'
             }
         }
         stage('Plan') {
             steps {
-                sh 'export IF_IN_AUTOMATION=true'
                 sh 'terraform plan -no-color'
             }
         }
