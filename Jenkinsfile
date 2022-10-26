@@ -17,16 +17,16 @@ pipeline {
                 sh 'terraform plan -no-color'
             }
         }
-        stage('Ec2 wait'){
-            steps{
-                sh 'aws ec2 wait instance-status-ok --region us-west-1'
-            }
-        }    
         stage('Apply') {
             steps {
                 sh 'terraform apply -auto-approve -no-color'
             }
         }
+        stage('Ec2 wait') {
+            steps{
+                sh 'aws ec2 wait instance-status-ok --region us-west-1'
+            }
+        }        
         stage('Destroy') {
             steps {
                 sh 'terraform destroy -auto-approve -no-color'
