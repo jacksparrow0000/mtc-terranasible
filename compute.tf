@@ -37,15 +37,13 @@ resource "aws_instance" "mtc_main" {
   }
 
   provisioner "local-exec" {
-    command = "printf '\n${self.public_ip}' >> aws_hosts && aws ec2 wait instance-status-ok --instance-ids ${self.id}  --region us-west-1"
+    command = "printf '\n${self.public_ip}' >> aws_hosts"
   }
   provisioner "local-exec" {
     when    = destroy
     command = "sed -i '/^[0-9]/d' aws_hosts"
   }
 }
-
-
 
 output "grafana_access" {
   value = { for i in aws_instance.mtc_main[*] : i.tags.Name => "${i.public_ip}:3000" }
