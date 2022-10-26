@@ -68,7 +68,7 @@ pipeline {
     }
     post {
         success {
-            echo 'Success!'
+            echo 'Success!!'
         }
         failure {
             sh 'terraform destroy -auto-approve -no-color -var-file="$BRANCH_NAME.tfvars"'
