@@ -20,10 +20,7 @@ pipeline {
         stage('Validate Apply') {
             input {
                 message "Do you want to Apply this plan?"
-                ok "Apply"
-            }
-            steps {
-                echo 'Apply Accepted'
+                ok "Apply this plan"
             }
         }
         stage('Apply') {
